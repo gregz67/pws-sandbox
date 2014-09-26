@@ -13,6 +13,7 @@ module.exports = function (grunt) {
     path: {
       // configurable paths
       client: require('./bower.json').appPath || 'public',
+      server: 'server',
       dist: 'dist'
     },
 
@@ -45,26 +46,23 @@ module.exports = function (grunt) {
             cwd: '<%= path.client %>',
             dest: '<%= path.dist %>/public',
             src: [
-              '*.{ico,png,txt}',
-              '.htaccess',
-              'bower_components/**/*',
-              'assets/images/{,*/}*.{webp}',
-              'assets/fonts/**/*',
               'index.html'
             ]
           },
+          // copying static Procfile and manifest.yml for testing
           {
             expand: true,
-            cwd: '.tmp/images',
-            dest: '<%= path.dist %>/public/assets/images',
-            src: ['generated/*']
+            cwd: '<%= path.server %>',
+            dest: '<%= path.dist %>',
+            src: [
+              '*'
+            ]
           },
           {
             expand: true,
             dest: '<%= path.dist %>',
             src: [
-              'package.json',
-              'web.js'
+              'package.json'
             ]
           }
         ]

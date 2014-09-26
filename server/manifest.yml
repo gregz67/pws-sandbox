@@ -1,0 +1,5 @@
+---
+applications:
+- name: pws-sandbox
+  command: node web.js
+  memory: 256M
